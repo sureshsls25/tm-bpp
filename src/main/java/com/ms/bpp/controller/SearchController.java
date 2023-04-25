@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ms.bpp.services.CommonService;
 import com.ms.bpp.util.ApplicationConstant;
 import com.ms.bpp.util.JsonUtil;
-import com.ms.common.model.search.SearchRequest;
+import com.ms.bpp.common.model.search.SearchRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

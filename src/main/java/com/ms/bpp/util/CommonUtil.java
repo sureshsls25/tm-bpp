@@ -1,7 +1,7 @@
 package com.ms.bpp.util;
 
 import com.ms.bpp.services.auth.UserDetailsImpl;
-import com.ms.common.model.common.Descriptor;
+import com.ms.bpp.common.model.common.Descriptor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.ObjectUtils;
 

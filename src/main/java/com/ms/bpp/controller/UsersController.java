@@ -11,7 +11,7 @@ import com.ms.bpp.util.ApplicationConstant;
 import com.ms.bpp.util.CommonUtil;
 import com.ms.bpp.util.JsonUtil;
 import com.ms.bpp.util.JwtUtils;
-import com.ms.common.dto.*;
+import com.ms.bpp.common.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

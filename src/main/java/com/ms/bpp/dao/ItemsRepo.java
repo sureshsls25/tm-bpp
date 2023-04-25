@@ -3,7 +3,7 @@ package com.ms.bpp.dao;
 
 import com.ms.bpp.entity.Items;
 import com.ms.bpp.entity.Providers;
-import com.ms.common.model.common.Item;
+import com.ms.bpp.common.model.common.Item;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

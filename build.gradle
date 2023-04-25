@@ -34,8 +34,6 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
-	implementation files("D:/Learning/common-model/build/libs/common-model-0.0.1-SNAPSHOT.jar")
-
 }
 
 tasks.named('test') {
