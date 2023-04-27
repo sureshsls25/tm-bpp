@@ -1,6 +1,12 @@
 package com.ms.bpp.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ms.bpp.common.enums.OrderStatus;
+import com.ms.bpp.common.model.common.*;
+import com.ms.bpp.common.model.confirm.ConfirmMessage;
+import com.ms.bpp.common.model.confirm.ConfirmRequest;
+import com.ms.bpp.common.model.onconfirm.OnConfirmMessage;
+import com.ms.bpp.common.model.onconfirm.OnConfirmRequest;
 import com.ms.bpp.dao.BppDao;
 import com.ms.bpp.dao.OrderRepo;
 import com.ms.bpp.dao.UsersRepo;
@@ -8,16 +14,6 @@ import com.ms.bpp.entity.SessionAttendeeDetails;
 import com.ms.bpp.entity.Users;
 import com.ms.bpp.exception.ApiException;
 import com.ms.bpp.util.CommonUtil;
-import com.ms.bpp.common.dto.CancellationOrRejectionDto;
-import com.ms.bpp.common.dto.OrderDto;
-import com.ms.bpp.common.dto.SessionAttendeeDetailsDto;
-import com.ms.bpp.common.enums.ContextAction;
-import com.ms.bpp.common.enums.OrderStatus;
-import com.ms.bpp.common.model.common.*;
-import com.ms.bpp.common.model.confirm.ConfirmMessage;
-import com.ms.bpp.common.model.confirm.ConfirmRequest;
-import com.ms.bpp.common.model.onconfirm.OnConfirmMessage;
-import com.ms.bpp.common.model.onconfirm.OnConfirmRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +21,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,9 +52,7 @@ public class OnConfirmBuilder {
 
     public OnConfirmRequest buildOnConfirm(ConfirmRequest request) throws UnknownHostException {
         OnConfirmRequest response = new OnConfirmRequest();
-        Context context = this.responseBuilder.buildContext(request.getContext(), ContextAction.CONFIRM.value());
-        context.setBppId(this.bppId);
-        context.setBapUri(InetAddress.getLocalHost().getHostAddress());
+        Context context = responseBuilder.buildContext(request.getContext(), request.getContext().getAction());
         OnConfirmMessage onConfirmMessage = new OnConfirmMessage();
         onConfirmMessage.setOrder(new Order());
         try {

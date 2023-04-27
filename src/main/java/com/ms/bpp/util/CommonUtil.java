@@ -15,7 +15,7 @@ import static com.ms.bpp.util.ApplicationConstant.TIMESTAMP_FORMAT;
 public class CommonUtil {
 
     public static String getDateTimeString(Date date) {
-        TimeZone tz = TimeZone.getTimeZone("UTC");
+        TimeZone tz = TimeZone.getTimeZone("IST");
         DateFormat df = new SimpleDateFormat(TIMESTAMP_FORMAT);
         df.setTimeZone(tz);
         return df.format(date);

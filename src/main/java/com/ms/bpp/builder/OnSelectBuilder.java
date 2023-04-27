@@ -47,9 +47,7 @@ public class OnSelectBuilder {
 
     public OnSelectRequest buildOnSelect(SelectRequest request) throws UnknownHostException {
         OnSelectRequest response = new OnSelectRequest();
-        Context context = responseBuilder.buildContext(request.getContext(), ContextAction.ON_SELECT.value());
-        context.setBppId(bppId);
-        context.setBapUri(InetAddress.getLocalHost().getHostAddress());
+        Context context = responseBuilder.buildContext(request.getContext(), request.getContext().getAction());
         OnSelectMessage selectMessage = new OnSelectMessage();
         selectMessage.setOrder(new Order());
         try {

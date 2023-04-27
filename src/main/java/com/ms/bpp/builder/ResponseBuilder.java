@@ -2,17 +2,15 @@ package com.ms.bpp.builder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ms.bpp.entity.Users;
 import com.ms.bpp.common.dto.*;
 import com.ms.bpp.common.enums.AckStatus;
 import com.ms.bpp.common.model.common.*;
 import com.ms.bpp.common.model.response.Response;
 import com.ms.bpp.common.model.response.ResponseMessage;
 import com.ms.bpp.common.model.search.SearchRequest;
+import com.ms.bpp.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,22 +23,27 @@ public class ResponseBuilder {
     @Value("${beckn.seller.url}")
     private String sellerUrl;
 
+    @Value("${beckn.seller.id}")
+    private String bppId;
+
     @Autowired
     ObjectMapper objectMapper;
 
     public Context buildContext(Context context, String action) {
+        context.setBppId(bppId);
         context.setAction(action);
-        context.setBppUri(this.sellerUrl);
+        context.setBppUri(sellerUrl);
         return context;
     }
 
 
-    public ResponseEntity<String> sendAck(SearchRequest searchRequest) throws JsonProcessingException {
+    public String sendAck(SearchRequest searchRequest) throws JsonProcessingException {
         Response response = new Response();
         ResponseMessage resMsg = new ResponseMessage();
         resMsg.setAck(new Ack(AckStatus.ACK));
         response.setMessage(resMsg);
-        return new ResponseEntity<>(objectMapper.writeValueAsString(response), HttpStatus.OK);
+        response.setContext(searchRequest.getContext());
+        return objectMapper.writeValueAsString(response);
     }
 
     public List<Provider> getUsersDetailsForSearch(List<Users> usersList) {

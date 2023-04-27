@@ -51,8 +51,6 @@ public class StatusBuilder {
     public OnStatusRequest getStatus(StatusRequest request) throws UnknownHostException {
         OnStatusRequest response = new OnStatusRequest();
         Context context = this.responseBuilder.buildContext(request.getContext(), ContextAction.STATUS.value());
-        context.setBppId(this.bppId);
-        context.setBapUri(InetAddress.getLocalHost().getHostAddress());
         OnStatusMessage onStatusMessage = new OnStatusMessage();
         try {
             status(request.getMessage(), onStatusMessage);

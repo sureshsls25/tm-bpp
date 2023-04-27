@@ -46,18 +46,17 @@ public class OnSearchBuilder {
 
     public OnSearchRequest buildOnSearch(SearchRequest request) throws UnknownHostException {
         OnSearchRequest response = new OnSearchRequest();
-        Context context = this.responseBuilder.buildContext(request.getContext(), ContextAction.ON_SEARCH.value());
-        context.setBppId(this.bppId);
-        context.setBapUri(InetAddress.getLocalHost().getHostAddress());
         OnSearchMessage message = new OnSearchMessage();
         try {
+            Context context = responseBuilder.buildContext(request.getContext(), request.getContext().getAction());
+            response.setContext(context);
             message.setCatalog(buildCatalog(request.getMessage()));
             response.setMessage(message);
         } catch (Exception e) {
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Unable to search application request");
         }
-        context.setTimestamp(CommonUtil.getDateTimeString(new Date()));
-        response.setContext(context);
+        request.getContext().setTimestamp(CommonUtil.getDateTimeString(new Date()));
+        response.setContext(request.getContext());
         return response;
     }
 
@@ -73,7 +72,7 @@ public class OnSearchBuilder {
                 catalog.setNoResult("No results found for the given search, Please try again with different search");
             }
         } catch (Exception e) {
-            logger.error("Unable to process search application request",e);
+            logger.error("Unable to process search application request", e);
             throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Unable to process search application request");
         }
         return catalog;

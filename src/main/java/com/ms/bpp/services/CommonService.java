@@ -55,10 +55,10 @@ public class CommonService {
         if (searchRequest.getMessage().getIntent().getItem() == null || searchRequest.getMessage().getIntent().getItem().getDescriptor() == null)
             return objectMapper.writeValueAsString(new MessageResponse("Search request can not be null"));
         OnSearchRequest response = onSearchBuilder.buildOnSearch(searchRequest);
-        String url = response.getContext().getBapUri().concat("/" + ContextAction.ON_SEARCH.value());
+        String url = response.getContext().getBapUri().concat("/" + ContextAction.ON_SEARCH);
         String json = objectMapper.writeValueAsString(response);
         logger.info("Sending Response to caller {}", json);
-        // sender.send(url, httpHeaders, json);
+        sender.send(url, httpHeaders, json);
         return json;
     }
 
