@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(ApplicationConstant.CONTEXT_ROOT)
+@CrossOrigin
 public class UsersController {
 
     @Autowired

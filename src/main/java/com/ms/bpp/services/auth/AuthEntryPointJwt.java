@@ -29,7 +29,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        logger.error("Unauthorized error: {}", authException.getMessage());
+        logger.error("Unauthorized error: {} {}",request.getRequestURI(), authException.getMessage());
         RestResponseBuilder message = RestResponse.builder()
                 .status(UNAUTHORIZED)
                 .error("Unauthenticated")

@@ -111,16 +111,16 @@ public class CommonService {
         return json;
     }
 
-    public String send(StatusRequest statusRequest) throws JsonProcessingException, UnknownHostException {
+    public String send(StatusRequest statusRequest,HttpHeaders httpHeaders) throws JsonProcessingException, UnknownHostException {
         if (CommonUtil.isEmpty(statusRequest.getMessage()))
             return objectMapper.writeValueAsString(new MessageResponse("Please provide valid mentees details"));
         if (CommonUtil.isEmpty(statusRequest.getMessage().getMailId()))
             return objectMapper.writeValueAsString(new MessageResponse("Please provide valid mentees mail id"));
         OnStatusRequest response = statusBuilder.getStatus(statusRequest);
-        String url = response.getContext().getBapUri().concat("/" + ContextAction.STATUS.value());
+        String url = response.getContext().getBapUri().concat("/" + ContextAction.ON_STATUS.value());
         String json = objectMapper.writeValueAsString(response);
         logger.info("Sending Response to caller {}", json);
-        // sender.send(url, httpHeaders, json);
+        sender.send(url, httpHeaders, json);
         return json;
     }
 

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.UnknownHostException;
 
 @RestController
-@RequestMapping(ApplicationConstant.EXTERNAL_CONTEXT_ROOT)
 public class ConfirmController {
 
 

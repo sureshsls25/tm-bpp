@@ -1,21 +1,22 @@
 package com.ms.bpp.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ms.bpp.services.CommonService;
-import com.ms.bpp.util.ApplicationConstant;
-import com.ms.bpp.util.JsonUtil;
 import com.ms.bpp.common.model.select.SelectRequest;
+import com.ms.bpp.services.CommonService;
+import com.ms.bpp.util.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.UnknownHostException;
 
 @RestController
-@RequestMapping(ApplicationConstant.EXTERNAL_CONTEXT_ROOT)
 public class SelectController {
 
 

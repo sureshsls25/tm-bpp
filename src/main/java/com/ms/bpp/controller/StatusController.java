@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.UnknownHostException;
 
 @RestController
-@RequestMapping(ApplicationConstant.EXTERNAL_CONTEXT_ROOT)
 public class StatusController {
 
     @Autowired
@@ -31,7 +30,7 @@ public class StatusController {
 
 //        CompletableFuture.runAsync(() -> {
 //            try {
-        String response = commonService.send(request);
+        String response = commonService.send(request,httpHeaders);
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
