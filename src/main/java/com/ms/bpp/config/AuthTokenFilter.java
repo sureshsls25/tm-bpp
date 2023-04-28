@@ -35,8 +35,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            String jwt = parseJwt(request);
-            if (requestsIgnoreJwt.stream().anyMatch(ingoreJwt -> !ingoreJwt.equalsIgnoreCase(request.getRequestURI()))) {
+            if (requestsIgnoreJwt.stream().noneMatch(ingoreJwt -> ingoreJwt.equalsIgnoreCase(request.getRequestURI()))) {
+                String jwt = parseJwt(request);
                 if (jwtUtils.validateJwtToken(jwt)) {
                     logger.info("Request with jwt {} {}",request.getRequestURI(),jwt);
                     String username = jwtUtils.getUserNameFromJwtToken(jwt);
