@@ -28,14 +28,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    final List<String> requestsIgnoreJwt = List.of("/search","/select","/confirm","/status");
+    final List<String> requestsIgnoreJwt = List.of("/api/signup","/api/signin","/search","/select","/confirm","/status","/h2-console/");
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            if (requestsIgnoreJwt.stream().noneMatch(ingoreJwt -> ingoreJwt.equalsIgnoreCase(request.getRequestURI()))) {
+            if (requestsIgnoreJwt.stream().noneMatch(ingoreJwt -> request.getRequestURI().contains(ingoreJwt))) {
                 String jwt = parseJwt(request);
                 if (jwtUtils.validateJwtToken(jwt)) {
                     logger.info("Request with jwt {} {}",request.getRequestURI(),jwt);

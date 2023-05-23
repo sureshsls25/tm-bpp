@@ -103,8 +103,8 @@ public class UsersController {
                 roles)));
     }
 
-    @GetMapping(path = "/users/orders", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> orderDetails(@RequestHeader HttpHeaders httpHeaders) throws JsonProcessingException {
+    @PostMapping(path = "/users/orders", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> orderDetails(@RequestBody String s,@RequestHeader HttpHeaders httpHeaders) throws JsonProcessingException {
         String response = commonService.convertObjectToString(usersService.getOrderDetailsByMentor());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

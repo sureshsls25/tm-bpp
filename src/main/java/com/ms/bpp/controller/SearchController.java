@@ -35,13 +35,13 @@ public class SearchController {
     public ResponseEntity<String> search(@RequestBody String body, @RequestHeader HttpHeaders httpHeaders) throws JsonProcessingException, UnknownHostException {
         SearchRequest request = (SearchRequest) jsonUtil.toObject(body, SearchRequest.class);
 
-//        CompletableFuture.runAsync(() -> {
-//            try {
+        CompletableFuture.runAsync(() -> {
+            try {
                 commonService.send(request, httpHeaders);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         return new ResponseEntity<>(responseBuilder.sendAck(request), HttpStatus.OK);
     }
 
